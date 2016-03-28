@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="GBK">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0">
+	<title>Phaser</title>
+    <style>
+        body { margin: 0; background-color: #000}
+        #login{
+            background: rgba(0,0,0,.5);
+            position: absolute;
+            left:0;
+            top:0;
+            right:0;
+            bottom:0;
+            display: none;
+        }
+        .login-warp{
+            background-size: 16rem;
+            background-position: 0 0;
+            background-image: url('assets/login-warp.png');
+            width:13.05rem;
+            height:12.55rem;
+            position: absolute;
+            left:50%;
+            margin-left:-6.525rem;
+            top:50%;
+            margin-top:-6.275rem;
+        }
+        #close-btn{
+            background-size: 16rem;
+            background-position: right 0;
+            width:1.45rem;
+            height:1.5rem;
+            position: absolute;
+            background-image: url('assets/login-warp.png');
+            right:-.5rem;
+            top:.5rem;
+        }
+        #from{
+            width:10rem;
+            margin:5.5rem auto 0
+        }
+        .frm input{
+            width:9rem;
+            height:1.8rem;
+            background-color: #cb8a48;
+            border: none;
+            margin-bottom:.7em;
+            padding:0 .5rem;
+            font-size: .8rem;
+            color:#fff;
+        }
+        .sub-btn{
+            text-align: center;
+        }
+        .sub-btn input{
+            background-size: 16rem;
+            background-position: 0 -13.45rem;
+            background-image: url('assets/login-warp.png');
+            width:5.175rem;
+            height:1.6rem;
+            border: none;
+            background-color: transparent;
+        }
+    </style>
+    <script src="phaser.min.js"></script>
+    <script src="Boot.js"></script>
+    <script src="Preloader.js?1"></script>
+    <script src="MainMenu.js"></script>
+    <script src="Game.js?3"></script>
+
+    <script>
+        var _score=0.0052;//用户成绩
+        var _useRank = '1000+';//用户名次
+        var _isLogin = 1; //用户是否登录 0未登录 1登录
+        var j_rankInfo = [
+            {
+                "j_Ranking": "01",
+                "j_NickName": "王哈2了哈",
+                'j_score':'3.5812米'
+            },
+            {
+                "j_Ranking": "02",
+                "j_NickName": "王哈了哈",
+                'j_score':'3.5812米'
+            }
+            ,
+            {
+                "j_Ranking": "03",
+                "j_NickName": "王哈了哈",
+                'j_score':'3.5812米'
+            }
+            ,
+            {
+                "j_Ranking": "04",
+                "j_NickName": "王哈了哈",
+                'j_score':'3.5812米'
+            }
+            ,
+            {
+                "j_Ranking": "05",
+                "j_NickName": "王哈了哈",
+                'j_score':'3.5812米'
+            }
+                ,
+            {
+                "j_Ranking": "06",
+                "j_NickName": "王哈2了哈",
+                'j_score':'3.5812米'
+            },
+            {
+                "j_Ranking": "07",
+                "j_NickName": "王哈了哈",
+                'j_score':'3.5812米'
+            }
+            ,
+            {
+                "j_Ranking": "08",
+                "j_NickName": "王哈了哈",
+                'j_score':'3.5812米'
+            }
+            ,
+            {
+                "j_Ranking": "09",
+                "j_NickName": "王哈了哈",
+                'j_score':'3.5812米'
+            }
+            ,
+            {
+                "j_Ranking": "10",
+                "j_NickName": "王哈了哈",
+                'j_score':'3.5812米'
+            }
+        ];
+    </script>
+
+</head>
+<body>
+    <div id="login">
+        <div class="login-warp">
+            <div id="close-btn"></div>
+            <div id="from">
+                <div class="frm"><input type="text" value="姓名" onfocus="if(this.value=='姓名'){this.value='';}"  onblur="if(this.value==''){this.value='姓名';}" /></div>
+                <div class="frm"><input type="text" value="电话" onfocus="if(this.value=='电话'){this.value='';}"  onblur="if(this.value==''){this.value='电话';}"/></div>
+            </div>
+            <div class="sub-btn"><input type="submit" value="" id="sub-btn"/></div>
+        </div>
+    </div>
+<script>
+    (function() {
+        var game = new Phaser.Game(640, 1010, Phaser.CANVAS, 'game');
+        game.state.add('Boot', MyGame.Boot);
+        game.state.add('Preloader', MyGame.Preloader);
+        game.state.add('MainMenu', MyGame.MainMenu);
+        game.state.add('Game', MyGame.Game);
+        game.state.start('Boot');
+    })();
+
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+                };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+
+        document.getElementById('close-btn').addEventListener('touchend',function(){
+            document.getElementById('login').style.display = 'none';
+        },false)
+
+        document.getElementById('sub-btn').addEventListener('touchend',function(){
+            _isLogin = 1;
+            document.getElementById('login').style.display = 'none';
+        },false)
+
+    })(document, window);
+
+</script>
+</body>
+</html>
